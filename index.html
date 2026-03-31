@@ -997,7 +997,9 @@
   function setLang(lang) {
     currentLang = lang;
     document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-    document.querySelector(`.lang-btn:${lang === 'pt' ? 'first' : 'last'}-child`).classList.add('active');
+    document.querySelectorAll('.lang-btn').forEach(b => {
+      if (b.textContent.trim().toLowerCase() === lang) b.classList.add('active');
+    });
     document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
 
     document.querySelectorAll('[data-pt]').forEach(el => {
