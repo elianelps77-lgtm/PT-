@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eliane Lopes | Personal Trainer & Exercise Physiologist</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f2ee;
+    --accent: #e8502a;
+    --accent2: #f0a500;
+    --gray: #1c1c1c;
+    --gray2: #2e2e2e;
+    --muted: #888;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── LANG TOGGLE ── */
+  #lang-toggle {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    z-index: 1000;
+    display: flex;
+    gap: 4px;
+    background: var(--gray);
+    border-radius: 30px;
+    padding: 4px;
+  }
+  .lang-btn {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 14px;
+    border-radius: 24px;
+    border: none;
+    cursor: pointer;
+    background: transparent;
+    color: var(--muted);
+    transition: all .2s;
+  }
+  .lang-btn.active {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 20px;
+    left: 24px;
+    z-index: 1000;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 22px;
+    color: var(--white);
+    letter-spacing: 1px;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color .2s;
+    letter-spacing: 0.04em;
+  }
+  .nav-links a:hover { color: var(--white); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    padding: 140px 60px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+  }
+  .hero-tag::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 2px;
+    background: var(--accent);
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(72px, 9vw, 120px);
+    line-height: 0.92;
+    letter-spacing: 1px;
+    color: var(--white);
+    margin-bottom: 28px;
+  }
+  .hero-title span {
+    color: var(--accent);
+    display: block;
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    font-weight: 300;
+    color: #aaa;
+    max-width: 400px;
+    line-height: 1.7;
+    margin-bottom: 44px;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 14px 32px;
+    border-radius: 4px;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: background .2s, transform .15s;
+  }
+  .btn-primary:hover { background: #d03e1a; transform: translateY(-1px); }
+
+  .btn-secondary {
+    display: inline-block;
+    background: transparent;
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 400;
+    padding: 14px 32px;
+    border-radius: 4px;
+    border: 1px solid var(--gray2);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: border-color .2s, transform .15s;
+  }
+  .btn-secondary:hover { border-color: var(--white); transform: translateY(-1px); }
+
+  .hero-right {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-bg-block {
+    position: absolute;
+    inset: 0;
+    background: var(--gray);
+    clip-path: polygon(8% 0, 100% 0, 100% 100%, 0% 100%);
+  }
+
+  .hero-graphic {
+    position: relative;
+    z-index: 2;
+    width: 340px;
+    height: 440px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-circle {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: var(--gray2);
+    border: 3px solid var(--accent);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 32px;
+    position: relative;
+  }
+
+  .hero-circle-icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+  }
+
+  .hero-circle h3 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: 1px;
+    color: var(--white);
+    line-height: 1.1;
+  }
+
+  .hero-circle p {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+
+  .badge-float {
+    position: absolute;
+    background: var(--accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 30px;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+  .badge-float.top { top: 60px; right: 20px; background: var(--accent2); color: var(--black); }
+  .badge-float.bottom { bottom: 80px; left: 10px; }
+
+  .hero-stats {
+    position: absolute;
+    bottom: 40px;
+    left: 60px;
+    display: flex;
+    gap: 40px;
+  }
+  .stat {
+    display: flex;
+    flex-direction: column;
+  }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 36px;
+    color: var(--white);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 100px 60px; }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 40px;
+    background: var(--accent);
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(42px, 6vw, 72px);
+    line-height: 0.95;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+  }
+
+  .section-sub {
+    font-size: 16px;
+    font-weight: 300;
+    color: #999;
+    max-width: 520px;
+    line-height: 1.7;
+  }
+
+  /* ── ABOUT ── */
+  #about {
+    background: var(--gray);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    padding: 100px 80px;
+  }
+
+  .about-text p {
+    font-size: 16px;
+    font-weight: 300;
+    color: #bbb;
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+  .about-text p strong {
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  .credentials {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 36px;
+  }
+  .credential {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    background: var(--black);
+    border-radius: 6px;
+    border-left: 3px solid var(--accent);
+  }
+  .credential-icon { font-size: 20px; }
+  .credential-text { font-size: 13px; font-weight: 400; color: #ccc; }
+  .credential-text strong { color: var(--white); font-weight: 500; display: block; }
+
+  .about-visual {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .about-card {
+    background: var(--black);
+    border-radius: 8px;
+    padding: 28px;
+    border: 1px solid var(--gray2);
+    transition: border-color .2s;
+  }
+  .about-card:hover { border-color: var(--accent); }
+  .about-card-num {
+    font-family: var(--font-display);
+    font-size: 48px;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .about-card h4 { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
+  .about-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* ── SERVICES ── */
+  #services {
+    background: var(--black);
+    padding: 100px 80px;
+  }
+
+  .services-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 64px;
+    align-items: end;
+  }
+
+  .plans-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .plan-card {
+    background: var(--gray);
+    border-radius: 10px;
+    padding: 36px 28px;
+    border: 1px solid var(--gray2);
+    position: relative;
+    transition: transform .2s, border-color .2s;
+    display: flex;
+    flex-direction: column;
+  }
+  .plan-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+
+  .plan-card.featured {
+    border-color: var(--accent);
+    background: linear-gradient(135deg, #1a0e0a 0%, var(--gray) 100%);
+  }
+
+  .plan-badge {
+    position: absolute;
+    top: -12px;
+    left: 28px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.06em;
+  }
+
+  .plan-name {
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+
+  .plan-period {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .plan-price {
+    font-family: var(--font-display);
+    font-size: 52px;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .plan-price span {
+    font-family: var(--font-body);
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--muted);
+  }
+
+  .plan-currency {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+
+  .plan-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+    margin-bottom: 32px;
+  }
+  .plan-features li {
+    font-size: 14px;
+    color: #bbb;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.4;
+  }
+  .plan-features li::before {
+    content: '→';
+    color: var(--accent);
+    font-size: 13px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .plan-cta {
+    display: block;
+    text-align: center;
+    padding: 13px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: all .2s;
+  }
+  .plan-cta.solid { background: var(--accent); color: #fff; }
+  .plan-cta.solid:hover { background: #d03e1a; }
+  .plan-cta.outline { border: 1px solid var(--gray2); color: var(--white); }
+  .plan-cta.outline:hover { border-color: var(--white); }
+
+  .modality-row {
+    margin-top: 48px;
+    display: flex;
+    gap: 20px;
+  }
+  .modality {
+    flex: 1;
+    background: var(--gray);
+    border-radius: 8px;
+    padding: 24px;
+    border: 1px solid var(--gray2);
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .modality-icon { font-size: 28px; flex-shrink: 0; }
+  .modality h4 { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
+  .modality p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--gray);
+    padding: 100px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .contact-info h2 { margin-bottom: 16px; }
+  .contact-info .section-sub { margin-bottom: 40px; }
+
+  .contact-channels {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .channel {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    background: var(--black);
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--white);
+    border: 1px solid var(--gray2);
+    transition: border-color .2s, transform .15s;
+  }
+  .channel:hover { border-color: var(--accent); transform: translateX(4px); }
+  .channel-icon { font-size: 20px; }
+  .channel-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  .channel-value { font-size: 14px; font-weight: 400; margin-top: 2px; }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .form-group label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: var(--black);
+    border: 1px solid var(--gray2);
+    border-radius: 4px;
+    padding: 12px 16px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--white);
+    outline: none;
+    transition: border-color .2s;
+    width: 100%;
+    resize: vertical;
+  }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: #555; }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--accent); }
+  .form-group select option { background: var(--black); }
+
+  .form-submit {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  #form-msg {
+    font-size: 13px;
+    color: #6dbf6d;
+    display: none;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black);
+    border-top: 1px solid var(--gray2);
+    padding: 40px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 24px;
+    letter-spacing: 1px;
+  }
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+  .footer-links a {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .footer-links a:hover { color: var(--white); }
+  .footer-copy { font-size: 12px; color: #555; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-tag    { animation: fadeUp .6s ease both; animation-delay: 0.1s; }
+  .hero-title  { animation: fadeUp .6s ease both; animation-delay: 0.2s; }
+  .hero-sub    { animation: fadeUp .6s ease both; animation-delay: 0.35s; }
+  .hero-cta    { animation: fadeUp .6s ease both; animation-delay: 0.5s; }
+  .hero-stats  { animation: fadeUp .6s ease both; animation-delay: 0.6s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    #hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 120px 32px 60px; }
+    #about, #contact { grid-template-columns: 1fr; padding: 60px 32px; gap: 48px; }
+    #services { padding: 60px 32px; }
+    .services-header { grid-template-columns: 1fr; gap: 24px; }
+    .plans-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    nav { display: none; }
+    footer { flex-direction: column; gap: 20px; text-align: center; padding: 32px; }
+    .modality-row { flex-direction: column; }
+    section { padding: 60px 32px; }
+    #about { padding: 60px 32px; }
+    #contact { padding: 60px 32px; }
+    #services { padding: 60px 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Language Toggle -->
+<div id="lang-toggle">
+  <button class="lang-btn active" onclick="setLang('pt')">PT</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+</div>
+
+<!-- Nav -->
+<nav>
+  <a class="nav-logo" href="#hero">EL</a>
+  <ul class="nav-links">
+    <li><a href="#about" data-pt="Sobre" data-en="About">Sobre</a></li>
+    <li><a href="#services" data-pt="Serviços" data-en="Services">Serviços</a></li>
+    <li><a href="#contact" data-pt="Contato" data-en="Contact">Contato</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-tag" data-pt="Personal Trainer & Fisiologista do Exercício" data-en="Personal Trainer & Exercise Physiologist">Personal Trainer & Fisiologista do Exercício</div>
+    <h1 class="hero-title">
+      ELIANE<span>LOPES</span>
+    </h1>
+    <p class="hero-sub" data-pt="Você merece um corpo mais saudável com base em ciência real. Consultoria bilíngue para mulheres que querem resultados duradouros — onde quer que você esteja." data-en="You deserve a healthier body grounded in real science. Bilingual coaching for women who want lasting results — wherever you are.">
+      Você merece um corpo mais saudável com base em ciência real. Consultoria bilíngue para mulheres que querem resultados duradouros — onde quer que você esteja.
+    </p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary" data-pt="Agendar consulta gratuita" data-en="Book a free consultation">Agendar consulta gratuita</a>
+      <a href="#services" class="btn-secondary" data-pt="Ver planos" data-en="See plans">Ver planos</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-bg-block"></div>
+    <div class="hero-graphic">
+      <span class="badge-float top">ACSM Certified ✓</span>
+      <div class="hero-circle">
+        <div class="hero-circle-icon">💪</div>
+        <h3>CIÊNCIA + RESULTADO</h3>
+        <p>Science-based fitness</p>
+      </div>
+      <span class="badge-float bottom">🇧🇷 PT &nbsp;|&nbsp; 🇺🇸 EN</span>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-num">+10</span>
+      <span class="stat-label" data-pt="Anos de experiência" data-en="Years of experience">Anos de experiência</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">3</span>
+      <span class="stat-label" data-pt="Certificações" data-en="Certifications">Certificações</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">100%</span>
+      <span class="stat-label" data-pt="Online & presencial" data-en="Online & in-person">Online & presencial</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-text">
+    <div class="section-label" data-pt="Sobre mim" data-en="About me">Sobre mim</div>
+    <h2 class="section-title" data-pt="FORMAÇÃO QUE FAZ A DIFERENÇA" data-en="EDUCATION THAT MAKES THE DIFFERENCE">FORMAÇÃO QUE FAZ A DIFERENÇA</h2>
+    <p data-pt="Sou professora de Educação Física formada pela <strong>Universidade Federal de Viçosa (UFV)</strong>, uma das mais conceituadas do Brasil. Minha jornada na saúde me levou a uma especialização em <strong>Saúde da Família pela ENSP Fiocruz</strong> — o maior instituto de saúde pública da América Latina." data-en="I hold a degree in Physical Education from the <strong>Federal University of Viçosa (UFV)</strong>, one of Brazil's most prestigious universities. My journey in health led me to specialize in <strong>Family Health at ENSP Fiocruz</strong> — Latin America's leading public health institute.">
+      Sou professora de Educação Física formada pela <strong>Universidade Federal de Viçosa (UFV)</strong>, uma das mais conceituadas do Brasil. Minha jornada na saúde me levou a uma especialização em <strong>Saúde da Família pela ENSP Fiocruz</strong> — o maior instituto de saúde pública da América Latina.
+    </p>
+    <p data-pt="Hoje, morando nos Estados Unidos, sou certificada como <strong>Exercise Physiologist pela ACSM</strong> (American College of Sports Medicine) — a certificação mais reconhecida globalmente na área de fisiologia do exercício. Toda essa bagagem se traduz em uma consultoria baseada em ciência, não em modinha." data-en="Now based in the United States, I'm certified as an <strong>Exercise Physiologist by ACSM</strong> (American College of Sports Medicine) — the world's most recognized certification in exercise physiology. All of this translates into coaching based on science, not trends.">
+      Hoje, morando nos Estados Unidos, sou certificada como <strong>Exercise Physiologist pela ACSM</strong> (American College of Sports Medicine) — a certificação mais reconhecida globalmente na área de fisiologia do exercício. Toda essa bagagem se traduz em uma consultoria baseada em ciência, não em modinha.
+    </p>
+    <div class="credentials">
+      <div class="credential">
+        <div class="credential-icon">🎓</div>
+        <div class="credential-text">
+          <strong data-pt="Educação Física — UFV" data-en="Physical Education — UFV">Educação Física — UFV</strong>
+          <span data-pt="Universidade Federal de Viçosa, Brasil" data-en="Federal University of Viçosa, Brazil">Universidade Federal de Viçosa, Brasil</span>
+        </div>
+      </div>
+      <div class="credential">
+        <div class="credential-icon">🏥</div>
+        <div class="credential-text">
+          <strong data-pt="Especialização — Saúde da Família" data-en="Specialization — Family Health">Especialização — Saúde da Família</strong>
+          <span>ENSP Fiocruz, Brasil</span>
+        </div>
+      </div>
+      <div class="credential">
+        <div class="credential-icon">🇺🇸</div>
+        <div class="credential-text">
+          <strong>Exercise Physiologist — ACSM</strong>
+          <span data-pt="American College of Sports Medicine, EUA" data-en="American College of Sports Medicine, USA">American College of Sports Medicine, EUA</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="about-visual">
+    <div class="about-card">
+      <div class="about-card-num">01</div>
+      <h4 data-pt="Abordagem integral" data-en="Holistic approach">Abordagem integral</h4>
+      <p data-pt="Combino fisiologia do exercício, saúde pública e nutrição comportamental para resultados reais e duradouros." data-en="I combine exercise physiology, public health, and behavioral nutrition for real, lasting results.">Combino fisiologia do exercício, saúde pública e nutrição comportamental para resultados reais e duradouros.</p>
+    </div>
+    <div class="about-card">
+      <div class="about-card-num">02</div>
+      <h4 data-pt="Especialista em mulheres +30" data-en="Women 30+ specialist">Especialista em mulheres +30</h4>
+      <p data-pt="Entendo as mudanças hormonais, metabólicas e de rotina que afetam mulheres nessa fase e crio estratégias que funcionam de verdade." data-en="I understand the hormonal, metabolic, and lifestyle changes affecting women at this stage and create strategies that truly work.">Entendo as mudanças hormonais, metabólicas e de rotina que afetam mulheres nessa fase e crio estratégias que funcionam de verdade.</p>
+    </div>
+    <div class="about-card">
+      <div class="about-card-num">03</div>
+      <h4 data-pt="Bilíngue PT/EN" data-en="Bilingual PT/EN">Bilíngue PT/EN</h4>
+      <p data-pt="Atendo brasileiras nos EUA e no Brasil, e americanas — na sua língua, no seu fuso, no seu ritmo." data-en="I serve Brazilians in the US and Brazil, and American clients — in your language, your timezone, your rhythm.">Atendo brasileiras nos EUA e no Brasil, e americanas — na sua língua, no seu fuso, no seu ritmo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header">
+    <div>
+      <div class="section-label" data-pt="Serviços" data-en="Services">Serviços</div>
+      <h2 class="section-title" data-pt="PLANOS DE CONSULTORIA" data-en="COACHING PLANS">PLANOS DE CONSULTORIA</h2>
+    </div>
+    <p class="section-sub" data-pt="Cada plano inclui avaliação física, treino personalizado, acompanhamento e suporte contínuo. Sem fórmula mágica — só ciência e dedicação." data-en="Every plan includes physical assessment, personalized training, follow-up, and ongoing support. No magic formula — just science and dedication.">
+      Cada plano inclui avaliação física, treino personalizado, acompanhamento e suporte contínuo. Sem fórmula mágica — só ciência e dedicação.
+    </p>
+  </div>
+
+  <div class="plans-grid">
+    <div class="plan-card">
+      <div class="plan-name" data-pt="MENSAL" data-en="MONTHLY">MENSAL</div>
+      <div class="plan-period" data-pt="Consultoria Online" data-en="Online Coaching">Consultoria Online</div>
+      <div class="plan-price">R$150<span>/mês</span></div>
+      <div class="plan-currency" data-pt="Pagamento em Real" data-en="Payment in BRL">Pagamento em Real</div>
+      <ul class="plan-features">
+        <li data-pt="Avaliação física inicial" data-en="Initial physical assessment">Avaliação física inicial</li>
+        <li data-pt="Treino personalizado" data-en="Personalized training plan">Treino personalizado</li>
+        <li data-pt="Suporte por WhatsApp" data-en="WhatsApp support">Suporte por WhatsApp</li>
+        <li data-pt="Revisão mensal do treino" data-en="Monthly workout review">Revisão mensal do treino</li>
+        <li data-pt="Orientação nutricional básica" data-en="Basic nutritional guidance">Orientação nutricional básica</li>
+      </ul>
+      <a href="#contact" class="plan-cta outline" data-pt="Começar agora" data-en="Get started">Começar agora</a>
+    </div>
+
+    <div class="plan-card featured">
+      <div class="plan-badge" data-pt="MAIS POPULAR" data-en="MOST POPULAR">MAIS POPULAR</div>
+      <div class="plan-name" data-pt="TRIMESTRAL" data-en="QUARTERLY">TRIMESTRAL</div>
+      <div class="plan-period" data-pt="Consultoria Online" data-en="Online Coaching">Consultoria Online</div>
+      <div class="plan-price">R$400<span>/3 meses</span></div>
+      <div class="plan-currency" data-pt="Economia de R$50 vs mensal" data-en="Save R$50 vs monthly">Economia de R$50 vs mensal</div>
+      <ul class="plan-features">
+        <li data-pt="Tudo do plano mensal" data-en="Everything in monthly plan">Tudo do plano mensal</li>
+        <li data-pt="Acompanhamento quinzenal por vídeo" data-en="Bi-weekly video check-ins">Acompanhamento quinzenal por vídeo</li>
+        <li data-pt="Ajuste de treino a qualquer momento" data-en="Workout adjustments anytime">Ajuste de treino a qualquer momento</li>
+        <li data-pt="Relatório de progresso mensal" data-en="Monthly progress report">Relatório de progresso mensal</li>
+        <li data-pt="Prioridade no atendimento" data-en="Priority support">Prioridade no atendimento</li>
+      </ul>
+      <a href="#contact" class="plan-cta solid" data-pt="Quero esse plano" data-en="I want this plan">Quero esse plano</a>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-name" data-pt="PRESENCIAL" data-en="IN-PERSON">PRESENCIAL</div>
+      <div class="plan-period" data-pt="Ohio, EUA" data-en="Ohio, USA">Ohio, EUA</div>
+      <div class="plan-price" style="font-size:36px" data-pt="Sob consulta" data-en="Contact for pricing">Sob consulta</div>
+      <div class="plan-currency" data-pt="Valor personalizado" data-en="Custom pricing">Valor personalizado</div>
+      <ul class="plan-features">
+        <li data-pt="Sessões individuais presenciais" data-en="Individual in-person sessions">Sessões individuais presenciais</li>
+        <li data-pt="Avaliação física completa" data-en="Full physical assessment">Avaliação física completa</li>
+        <li data-pt="Treino com supervisão direta" data-en="Directly supervised training">Treino com supervisão direta</li>
+        <li data-pt="Disponível na região de Ohio" data-en="Available in the Ohio area">Disponível na região de Ohio</li>
+      </ul>
+      <a href="#contact" class="plan-cta outline" data-pt="Solicitar informações" data-en="Request information">Solicitar informações</a>
+    </div>
+  </div>
+
+  <div class="modality-row">
+    <div class="modality">
+      <div class="modality-icon">💻</div>
+      <div>
+        <h4 data-pt="100% Online — Atendo o mundo todo" data-en="100% Online — Worldwide">100% Online — Atendo o mundo todo</h4>
+        <p data-pt="Consultoria por vídeo, WhatsApp e plataforma digital. Não importa onde você mora." data-en="Coaching via video, WhatsApp and digital platform. No matter where you live.">Consultoria por vídeo, WhatsApp e plataforma digital. Não importa onde você mora.</p>
+      </div>
+    </div>
+    <div class="modality">
+      <div class="modality-icon">📍</div>
+      <div>
+        <h4 data-pt="Presencial — Ohio, EUA" data-en="In-person — Ohio, USA">Presencial — Ohio, EUA</h4>
+        <p data-pt="Para quem está na região de Ohio e prefere o contato direto com a personal trainer." data-en="For those in the Ohio area who prefer direct in-person training.">Para quem está na região de Ohio e prefere o contato direto com a personal trainer.</p>
+      </div>
+    </div>
+    <div class="modality">
+      <div class="modality-icon">🌎</div>
+      <div>
+        <h4 data-pt="Bilíngue — PT e EN" data-en="Bilingual — PT and EN">Bilíngue — PT e EN</h4>
+        <p data-pt="Atendo em português e inglês, para brasileiros no Brasil, nos EUA e americanos." data-en="I work in both Portuguese and English — for Brazilians in Brazil, in the US, and for Americans.">Atendo em português e inglês, para brasileiros no Brasil, nos EUA e americanos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-info">
+    <div class="section-label" data-pt="Contato" data-en="Contact">Contato</div>
+    <h2 class="section-title" data-pt="VAMOS COMEÇAR SUA JORNADA" data-en="LET'S START YOUR JOURNEY">VAMOS COMEÇAR SUA JORNADA</h2>
+    <p class="section-sub" data-pt="Agende uma conversa gratuita de 30 minutos. Sem compromisso — só para entender seus objetivos e ver como posso te ajudar." data-en="Book a free 30-minute conversation. No commitment — just to understand your goals and see how I can help you.">
+      Agende uma conversa gratuita de 30 minutos. Sem compromisso — só para entender seus objetivos e ver como posso te ajudar.
+    </p>
+    <div class="contact-channels">
+      <a class="channel" href="mailto:elianelps77@gmail.com">
+        <div class="channel-icon">✉️</div>
+        <div>
+          <div class="channel-label">Email</div>
+          <div class="channel-value">elianelps77@gmail.com</div>
+        </div>
+      </a>
+      <a class="channel" href="https://wa.me/14194697491" target="_blank">
+        <div class="channel-icon">💬</div>
+        <div>
+          <div class="channel-label">WhatsApp</div>
+          <div class="channel-value">+1 (419) 469-7491</div>
+        </div>
+      </a>
+      <a class="channel" href="https://instagram.com/elianee.lps" target="_blank">
+        <div class="channel-icon">📸</div>
+        <div>
+          <div class="channel-label">Instagram</div>
+          <div class="channel-value">@elianee.lps</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <form class="contact-form" onsubmit="handleSubmit(event)">
+    <div class="form-row">
+      <div class="form-group">
+        <label data-pt="Nome" data-en="Name">Nome</label>
+        <input type="text" placeholder="Seu nome" data-pt-placeholder="Seu nome" data-en-placeholder="Your name" required>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="seu@email.com" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <label data-pt="Interesse" data-en="Interest">Interesse</label>
+      <select>
+        <option value="" data-pt="Selecione um plano" data-en="Select a plan">Selecione um plano</option>
+        <option value="mensal" data-pt="Consultoria Mensal — R$150" data-en="Monthly Coaching — R$150">Consultoria Mensal — R$150</option>
+        <option value="trimestral" data-pt="Consultoria Trimestral — R$400" data-en="Quarterly Coaching — R$400">Consultoria Trimestral — R$400</option>
+        <option value="presencial" data-pt="Presencial (Ohio, EUA)" data-en="In-person (Ohio, USA)">Presencial (Ohio, EUA)</option>
+        <option value="duvida" data-pt="Só tenho dúvidas" data-en="Just have questions">Só tenho dúvidas</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label data-pt="Mensagem" data-en="Message">Mensagem</label>
+      <textarea rows="4" placeholder="Conte seus objetivos..." data-pt-placeholder="Conte seus objetivos..." data-en-placeholder="Tell me about your goals..."></textarea>
+    </div>
+    <div class="form-submit">
+      <button type="submit" class="btn-primary" data-pt="Enviar mensagem" data-en="Send message">Enviar mensagem</button>
+      <span id="form-msg" data-pt="Mensagem enviada! Em breve entro em contato." data-en="Message sent! I'll be in touch soon.">Mensagem enviada! Em breve entro em contato.</span>
+    </div>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">ELIANE LOPES</div>
+  <ul class="footer-links">
+    <li><a href="#about" data-pt="Sobre" data-en="About">Sobre</a></li>
+    <li><a href="#services" data-pt="Serviços" data-en="Services">Serviços</a></li>
+    <li><a href="#contact" data-pt="Contato" data-en="Contact">Contato</a></li>
+    <li><a href="https://instagram.com/elianee.lps" target="_blank">Instagram</a></li>
+  </ul>
+  <div class="footer-copy" data-pt="© 2025 Eliane Lopes. Todos os direitos reservados." data-en="© 2025 Eliane Lopes. All rights reserved.">© 2025 Eliane Lopes. Todos os direitos reservados.</div>
+</footer>
+
+<script>
+  let currentLang = 'pt';
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector(`.lang-btn:${lang === 'pt' ? 'first' : 'last'}-child`).classList.add('active');
+    document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+
+    document.querySelectorAll('[data-pt]').forEach(el => {
+      const val = el.getAttribute(`data-${lang}`);
+      if (val) el.innerHTML = val;
+    });
+
+    document.querySelectorAll('[data-pt-placeholder]').forEach(el => {
+      const val = el.getAttribute(`data-${lang}-placeholder`);
+      if (val) el.placeholder = val;
+    });
+
+    document.querySelectorAll('select option[data-pt]').forEach(el => {
+      const val = el.getAttribute(`data-${lang}`);
+      if (val) el.textContent = val;
+    });
+
+    const msg = document.getElementById('form-msg');
+    if (msg) msg.textContent = msg.getAttribute(`data-${lang}`);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const msg = document.getElementById('form-msg');
+    msg.style.display = 'block';
+    e.target.reset();
+    setTimeout(() => { msg.style.display = 'none'; }, 4000);
+  }
+</script>
+</body>
+</html>
