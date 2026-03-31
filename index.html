@@ -697,8 +697,10 @@
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
     #hero { grid-template-columns: 1fr; }
-    .hero-right { display: none; }
-    .hero-left { padding: 120px 32px 60px; }
+    .hero-right { display: flex; clip-path: none; min-height: 320px; }
+    .hero-bg-block { clip-path: none; }
+    .hero-photo-wrap { width: 220px; height: 280px; }
+    .hero-left { padding: 120px 32px 40px; }
     #about, #contact { grid-template-columns: 1fr; padding: 60px 32px; gap: 48px; }
     #services { padding: 60px 32px; }
     .services-header { grid-template-columns: 1fr; gap: 24px; }
@@ -711,6 +713,8 @@
     #about { padding: 60px 32px; }
     #contact { padding: 60px 32px; }
     #services { padding: 60px 32px; }
+    #lang-toggle { top: 12px; right: 12px; }
+    .lang-btn { padding: 6px 16px; font-size: 13px; }
   }
 </style>
 </head>
@@ -996,8 +1000,8 @@
 
   function setLang(lang) {
     currentLang = lang;
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.lang-btn').forEach(b => {
+      b.classList.remove('active');
       if (b.textContent.trim().toLowerCase() === lang) b.classList.add('active');
     });
     document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
