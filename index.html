@@ -5,6 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Eliane Lopes | Personal Trainer & Exercise Physiologist</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<script>
+  var currentLang = 'pt';
+  window.setLang = function(lang) {
+    currentLang = lang;
+    document.querySelectorAll('.lang-btn').forEach(function(b) {
+      b.classList.remove('active');
+      if (b.textContent.trim().toLowerCase() === lang) b.classList.add('active');
+    });
+    document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+    document.querySelectorAll('[data-pt]').forEach(function(el) {
+      var val = el.getAttribute('data-' + lang);
+      if (val) el.innerHTML = val;
+    });
+    document.querySelectorAll('[data-pt-placeholder]').forEach(function(el) {
+      var val = el.getAttribute('data-' + lang + '-placeholder');
+      if (val) el.placeholder = val;
+    });
+    document.querySelectorAll('select option[data-pt]').forEach(function(el) {
+      var val = el.getAttribute('data-' + lang);
+      if (val) el.textContent = val;
+    });
+    var msg = document.getElementById('form-msg');
+    if (msg) msg.textContent = msg.getAttribute('data-' + lang);
+  };
+</script>
 <style>
   :root {
     --black: #0a0a0a;
@@ -722,8 +747,8 @@
 
 <!-- Language Toggle -->
 <div id="lang-toggle">
-  <button class="lang-btn active" onclick="setLang('pt')">PT</button>
-  <button class="lang-btn" onclick="setLang('en')">EN</button>
+  <button class="lang-btn active" id="btn-pt" onclick="window.setLang('pt')">PT</button>
+  <button class="lang-btn" id="btn-en" onclick="window.setLang('en')">EN</button>
 </div>
 
 <!-- Nav -->
@@ -998,31 +1023,6 @@
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   let currentLang = 'pt';
 
-  function setLang(lang) {
-    currentLang = lang;
-    document.querySelectorAll('.lang-btn').forEach(b => {
-      b.classList.remove('active');
-      if (b.textContent.trim().toLowerCase() === lang) b.classList.add('active');
-    });
-    document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
-
-    document.querySelectorAll('[data-pt]').forEach(el => {
-      const val = el.getAttribute(`data-${lang}`);
-      if (val) el.innerHTML = val;
-    });
-
-    document.querySelectorAll('[data-pt-placeholder]').forEach(el => {
-      const val = el.getAttribute(`data-${lang}-placeholder`);
-      if (val) el.placeholder = val;
-    });
-
-    document.querySelectorAll('select option[data-pt]').forEach(el => {
-      const val = el.getAttribute(`data-${lang}`);
-      if (val) el.textContent = val;
-    });
-
-    const msg = document.getElementById('form-msg');
-    if (msg) msg.textContent = msg.getAttribute(`data-${lang}`);
-  }
+  // setLang moved to head
 
   fun
